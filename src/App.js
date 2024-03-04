@@ -16,24 +16,27 @@ function App() {
       msg: message,
       type: type
     })
+    setTimeout(() => {
+      setAlert(null)
+    }, 1500);
   }
 
   const toggleMode = () => {
     if (mode === 'white'){
-      setMode('black')
-      document.body.style.backgroundColor = 'black'
+      setMode('#11aad9')
+      document.body.style.backgroundColor = '#11aad9'
       showAlert("dark mode enabled", "black")
     }
     else{
       setMode('white')
       document.body.style.backgroundColor = 'white'
-      showAlert("light mode enabled", "black")
+      showAlert("light mode enabled", "white")
     }
   }
   return (
     <div>
       <Navbar title= "Textutils" mode = {mode} toggleMode={toggleMode}/>
-      <Textform heading= "Enter the text to analyze"/>
+      <Textform showAlert={showAlert} heading= "Enter the text to analyze"/>
       {/* <About/> */}
       <Alert alert= {alert}/>
 

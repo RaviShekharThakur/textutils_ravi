@@ -4,12 +4,21 @@ export default function Textform(props) {
   const handleUpClick = () =>{
     let newText = text.toUpperCase();
     setText(newText)
+    props.showAlert("converted to uppercase")
   }
 
   const handledownClick = () =>{
     let newText = text.toLowerCase();
     setText(newText)
+    props.showAlert("converted to lowercase")
   }
+
+  const handleClearText = () =>{
+    let newText = "";
+    setText(newText)
+    props.showAlert("cleared text")
+  }
+
   const toTitleCase = (str) => {
     return str.replace(/\w\S*/g, (txt) => {
       return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
@@ -19,6 +28,7 @@ export default function Textform(props) {
   const handleTitleClick = () => {
     let newText = toTitleCase(text);
     setText(newText);
+    props.showAlert("converted to Titlecase")
   };
 
   const handleOnChange = (event) => {
@@ -36,6 +46,7 @@ export default function Textform(props) {
                 <button type="button" className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700" onClick={handleUpClick}>Convert to uppercase</button>
                 <button type="button" className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700" onClick={handledownClick}>Convert to Lowercase</button>
                 <button type="button" className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700" onClick={handleTitleClick}>Convert to titlecase</button>
+                <button type="button" className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700" onClick={handleClearText}>Clear Text</button>
             </div>
         </form>
       </div>
