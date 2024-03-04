@@ -1,46 +1,52 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import './App.css';
-// import About from './components/About';
+import About from './components/About';
 import Navbar from './components/Navbar';
 import Alert from './components/Alert';
 import Textform from './components/Textform';
-import React, {userState} from 'react';
-import './index.css';
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes
+} from "react-router-dom";
 
 function App() {
-  const [mode, setMode] = useState('white')
-  const [alert, setAlert] = useState(null)
+  const [mode, setMode] = useState('white');
+  const [alert, setAlert] = useState(null);
 
-  const showAlert = (message, type)=>{
+  const showAlert = (message, type) => {
     setAlert({
       msg: message,
       type: type
-    })
+    });
     setTimeout(() => {
-      setAlert(null)
+      setAlert(null);
     }, 1500);
-  }
+  };
 
   const toggleMode = () => {
-    if (mode === 'white'){
-      setMode('#11aad9')
-      document.body.style.backgroundColor = '#11aad9'
-      showAlert("dark mode enabled", "black")
+    if (mode === 'white') {
+      setMode('#11aad9');
+      document.body.style.backgroundColor = '#11aad9';
+      showAlert("dark mode enabled", "black");
+    } else {
+      setMode('white');
+      document.body.style.backgroundColor = 'white';
+      showAlert("light mode enabled", "white");
     }
-    else{
-      setMode('white')
-      document.body.style.backgroundColor = 'white'
-      showAlert("light mode enabled", "white")
-    }
-  }
-  return (
-    <div>
-      <Navbar title= "Textutils" mode = {mode} toggleMode={toggleMode}/>
-      <Textform showAlert={showAlert} heading= "Enter the text to analyze"/>
-      {/* <About/> */}
-      <Alert alert= {alert}/>
+  };
 
-    </div>
+  return (
+    <Router>
+      <div>
+        <Navbar title="Textutils" mode={mode} toggleMode={toggleMode} />
+        <Routes>
+          <Route path="/about" element={<About />} />
+          <Route path="/" element={<Textform showAlert={showAlert} heading="Enter the text to analyze" />} />
+        </Routes>
+        <Alert alert={alert} />
+      </div>
+    </Router>
   );
 }
 
